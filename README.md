@@ -1,6 +1,4 @@
-# genschsa/mssql-server-linux
-
-This is the git repo of the custom [genschsa/mssql-server-linux](https://hub.docker.com/r/genschsa/mssql-server-linux/) Docker image.
+# nexbit/mssql-server-linux
 
 This image is an extension of the official [microsoft/mssql-server-linux](https://hub.docker.com/r/microsoft/mssql-server-linux/) Docker image
 
@@ -8,15 +6,19 @@ It adds functionality to initialize a fresh instance. When a container is starte
 
 ## Running this image
 
+This image supports the `latest` tag of the `microsoft/mssql-server-linux` image.
+
+Use the following command at the root of your repo to launch an `SQL Server Express` linux container. Make sure you have an `initdb.d` local directory populated with your initialization scripts.
+
 ```
-docker run -p 1433:1433 --name mssql -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=Strong(!)Password' -v $PWD/initdb.d:/docker-entrypoint-initdb.d -d genschsa/mssql-server-linux
+docker run -p 1433:1433 --name mssql -e 'ACCEPT_EULA=Y' -e 'MSSQL_PID=Express' -e 'SA_PASSWORD=Strong(!)Password' -v $PWD/initdb.d:/docker-entrypoint-initdb.d -d nexbit/mssql-server-linux
 ```
 
 ## Additional information:
 
  * Linux-based mssql-docker [git repo](https://github.com/Microsoft/mssql-docker/tree/master/linux)
  * Running [SQL Server on Linux](https://docs.microsoft.com/en-us/sql/linux/) on top of an Ubuntu 16.04 base image.
- * Note that the version 2017-CU3 currently (as of Feb. 15, 2018) has a bug described here: [https://github.com/Microsoft/mssql-docker/issues/136](https://github.com/Microsoft/mssql-docker/issues/136)
+ * It supports and has been tested against the `latest` tag of the `microsoft/mssql-server-linux` image. *Usage with older tags is discouraged and at your own risk.*
  * Make sure that the .sh files have UNIX-style (LF) line endings. Depending on your platform and Git configuration, Git may change them to Windows-style (CR+LF). In this case, the container won't start, and you may see a non-informative error message like: 
  ```
  standard_init_linux.go:195: exec user process caused "no such file or directory"'.

@@ -1,20 +1,26 @@
 {
   "name": "mssql-server-linux",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Clone of microsoft/mssql-server-linux image with initdb functionality.",
   "main": "index.js",
   "scripts": {
-    "start": "docker run -p 1433:1433 --name mssql -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=Strong(!)Password' -v $PWD/initdb.d:/docker-entrypoint-initdb.d -d genschsa/mssql-server-linux",
+    "start": "docker run -p 1433:1433 --name mssql -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Strong(!)Password' -v $PWD/initdb.d:/docker-entrypoint-initdb.d -d nexbit/mssql-server-linux",
     "stop": "docker stop mssql && docker rm mssql",
-    "build": "docker build -t genschsa/mssql-server-linux .",
+    "build": "docker build -t nexbit/mssql-server-linux .",
     "sqlcmd": "docker exec -it mssql sqlcmd -U SA -P 'Strong(!)Password'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shanegenschaw/mssql-docker.git"
+    "url": "git+https://github.com/nexbit/mssql-docker.git"
   },
   "author": "Shane Genschaw",
+  "contributors": [
+    {
+      "name": "Paolo Furini",
+      "url": "https://nexbit.it"
+    }
+  ],
   "license": "ISC",
-  "homepage": "https://github.com/shanegenschaw/mssql-docker"
+  "homepage": "https://github.com/nexbit/mssql-docker"
 }
